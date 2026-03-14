@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\jaros\\source\\repos\\WeatherService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C806B722-13A4-72FC-A926-C06D7C13703E}|WeatherService.Server\\WeatherService.Server.csproj|c:\\users\\jaros\\source\\repos\\weatherservice\\weatherservice.server\\dockerfile||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{C806B722-13A4-72FC-A926-C06D7C13703E}|WeatherService.Server\\WeatherService.Server.csproj|solutionrelative:weatherservice.server\\dockerfile||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{1525E342-97D6-9992-B06E-9F6494BA6963}|WeatherService.Server.csproj|c:\\users\\jaros\\source\\repos\\weatherservice\\extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1525E342-97D6-9992-B06E-9F6494BA6963}|WeatherService.Server.csproj|solutionrelative:extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C806B722-13A4-72FC-A926-C06D7C13703E}|WeatherService.Server\\WeatherService.csproj|C:\\Users\\jaros\\source\\repos\\WeatherService\\weatherservice.server\\weatherservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{C806B722-13A4-72FC-A926-C06D7C13703E}|WeatherService.Server\\WeatherService.csproj|solutionrelative:weatherservice.server\\weatherservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{1525E342-97D6-9992-B06E-9F6494BA6963}|WeatherService.Server.csproj|c:\\users\\jaros\\source\\repos\\weatherservice\\dockerfile||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{1525E342-97D6-9992-B06E-9F6494BA6963}|WeatherService.Server.csproj|solutionrelative:dockerfile||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C806B722-13A4-72FC-A926-C06D7C13703E}|WeatherService.Server\\WeatherService.Server.csproj|c:\\users\\jaros\\source\\repos\\weatherservice\\weatherservice.server\\weatherservice.server.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{C806B722-13A4-72FC-A926-C06D7C13703E}|WeatherService.Server\\WeatherService.Server.csproj|solutionrelative:weatherservice.server\\weatherservice.server.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{1525E342-97D6-9992-B06E-9F6494BA6963}|WeatherService.Server.csproj|c:\\users\\jaros\\source\\repos\\weatherservice\\.gitattributes||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{1525E342-97D6-9992-B06E-9F6494BA6963}|WeatherService.Server.csproj|solutionrelative:.gitattributes||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +22,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Extensions.cs",
+              "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\Extensions.cs",
+              "RelativeDocumentMoniker": "Extensions.cs",
+              "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\Extensions.cs",
+              "RelativeToolTip": "Extensions.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T21:55:42.274Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
@@ -34,39 +47,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WeatherService.csproj",
-              "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.csproj",
-              "RelativeDocumentMoniker": "WeatherService.Server\\WeatherService.csproj",
-              "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.csproj",
-              "RelativeToolTip": "WeatherService.Server\\WeatherService.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-14T21:23:20.054Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "WeatherService.Server.csproj",
-              "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.Server.csproj",
-              "RelativeDocumentMoniker": "WeatherService.Server\\WeatherService.Server.csproj",
-              "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.Server.csproj",
-              "RelativeToolTip": "WeatherService.Server\\WeatherService.Server.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-14T21:34:59.254Z"
+              "Title": ".gitattributes",
+              "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\.gitattributes",
+              "RelativeDocumentMoniker": ".gitattributes",
+              "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\.gitattributes",
+              "RelativeToolTip": ".gitattributes",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-14T21:54:32.74Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\Dockerfile",
-              "RelativeDocumentMoniker": "WeatherService.Server\\Dockerfile",
-              "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\Dockerfile",
-              "RelativeToolTip": "WeatherService.Server\\Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-14T21:24:42.949Z",
+              "WhenOpened": "2026-03-14T21:40:52.169Z",
               "EditorCaption": ""
             }
           ]

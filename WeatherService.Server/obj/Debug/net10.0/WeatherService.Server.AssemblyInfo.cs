@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WeatherService.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e95c1fd8951de17e6b8c1b308908f6b9bfbbc51")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a3bf11ec1c28a1f8a70db2dce03f21c45f9f88ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("WeatherService.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WeatherService.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

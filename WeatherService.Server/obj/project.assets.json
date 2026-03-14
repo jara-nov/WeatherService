@@ -1038,9 +1038,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.Server.csproj",
-      "projectName": "WeatherService.Server",
-      "projectPath": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.Server.csproj",
+      "projectUniqueName": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.csproj",
+      "projectName": "WeatherService",
+      "projectPath": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\WeatherService.csproj",
       "packagesPath": "C:\\Users\\jaros\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\jaros\\source\\repos\\WeatherService\\WeatherService.Server\\obj\\",
       "projectStyle": "PackageReference",

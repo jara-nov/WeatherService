@@ -1,3 +1,3 @@
 <Solution>
-  <Project Path="WeatherService.Server.csproj" />
+  <Project Path="WeatherService.csproj" />
 </Solution>

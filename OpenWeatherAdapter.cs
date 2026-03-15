@@ -23,6 +23,7 @@ public class OpenWeatherAdapter:IDisposable
         {
             string attributesString = string.Join("&", attributes.Select(a => $"{a.Key}={a.Value}"));
             string requestUrl = $"{API_URL}?{attributesString}";
+            Console.WriteLine($"request url = {requestUrl}");
             var response = client.GetAsync(requestUrl).Result;
             return response.Content.ReadAsStringAsync().Result;
         }

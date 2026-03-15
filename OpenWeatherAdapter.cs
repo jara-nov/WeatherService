@@ -3,17 +3,17 @@ using System;
 
 public class OpenWeatherAdapter:IDisposable
 {
-	string API_URL = "api.openweathermap.org/data/2.5/forecast";
+	string API_URL = "https://api.openweathermap.org/data/2.5/weather";
     AttributeDictionary attributes;
     private readonly string? ApiKey = Environment.GetEnvironmentVariable("OPEN_WEATHER_API_KEY");
 
     public OpenWeatherAdapter(string latitude, string longitude)
     {
-        attributes = new AttributeDictionary() {
+        attributes = [
             new KeyValuePair<string, string?>("lat", latitude), 
             new KeyValuePair<string, string?>("lon", longitude),
             new KeyValuePair<string, string?>("appid", ApiKey)
-        };
+        ];
     }
 
     public string GetWeather()

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\jaros\\source\\repos\\WeatherService\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9D644B45-04C7-06B1-8161-D1D9DAFC2CDA}|WeatherService.csproj|c:\\users\\jaros\\source\\repos\\weatherservice\\openweatheradapter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D644B45-04C7-06B1-8161-D1D9DAFC2CDA}|WeatherService.csproj|solutionrelative:openweatheradapter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9D644B45-04C7-06B1-8161-D1D9DAFC2CDA}|WeatherService.csproj|c:\\users\\jaros\\source\\repos\\weatherservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9D644B45-04C7-06B1-8161-D1D9DAFC2CDA}|WeatherService.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -18,11 +22,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "OpenWeatherAdapter.cs",
+              "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\OpenWeatherAdapter.cs",
+              "RelativeDocumentMoniker": "OpenWeatherAdapter.cs",
+              "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\OpenWeatherAdapter.cs",
+              "RelativeToolTip": "OpenWeatherAdapter.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-15T00:27:02.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -34,16 +59,8 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Extensions.cs",
               "DocumentMoniker": "C:\\Users\\jaros\\source\\repos\\WeatherService\\Extensions.cs",
               "RelativeDocumentMoniker": "Extensions.cs",
@@ -51,8 +68,7 @@
               "RelativeToolTip": "Extensions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T21:55:42.274Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T21:55:42.274Z"
             }
           ]
         }

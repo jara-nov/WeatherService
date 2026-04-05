@@ -42,7 +42,7 @@ public class OpenWeatherAdapter:IDisposable
         public double temp_min { get; set; }
         public double temp_max { get; set; }
         public string? icon { get; set; }
-        public DateTime datum { get; set; }
+        public long datum { get; set; }
     }
 
     private static class OpenWeatherMapper
@@ -61,9 +61,7 @@ public class OpenWeatherAdapter:IDisposable
                 temp_min = KelvinToCelsius(source.main.temp_min),
                 temp_max = KelvinToCelsius(source.main.temp_max),
                 icon = source.weather[0].icon,
-                datum = DateTimeOffset.FromUnixTimeSeconds(source.dt)
-                    .ToOffset(TimeSpan.FromSeconds(source.timezone))
-                    .DateTime
+                datum = (source.dt)
             };
         }
 

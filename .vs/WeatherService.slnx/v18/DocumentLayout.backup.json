@@ -44,7 +44,7 @@
               "RelativeDocumentMoniker": "OpenWeatherAdapter.cs",
               "ToolTip": "C:\\Users\\jaros\\source\\repos\\WeatherService\\OpenWeatherAdapter.cs",
               "RelativeToolTip": "OpenWeatherAdapter.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAAAB0AAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAYwC0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-05T09:07:26.288Z",
               "EditorCaption": ""
@@ -59,8 +59,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAAACEAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T09:06:33.007Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-05T09:06:33.007Z"
             },
             {
               "$type": "Document",
@@ -72,8 +71,7 @@
               "RelativeToolTip": "Extensions.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T09:06:20.743Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-05T09:06:20.743Z"
             }
           ]
         }

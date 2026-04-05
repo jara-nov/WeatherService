@@ -41,7 +41,7 @@ public class OpenWeatherAdapter:IDisposable
         public double feels_like { get; set; }
         public double temp_min { get; set; }
         public double temp_max { get; set; }
-        public string? icon { get; set; }
+        public int icon { get; set; }
         public long datum { get; set; }
     }
 
@@ -54,13 +54,16 @@ public class OpenWeatherAdapter:IDisposable
             {
                 throw new InvalidOperationException("OpenWeather response does not contain weather data.");
             }
+            string? iconString = source.weather[0].icon;
+            string iconSubstring = iconString?[..2] ?? "00";
+            _ = int.TryParse(iconSubstring, out int iconValue);
 
             return new WeatherData
             {
                 feels_like = KelvinToCelsius(source.main.feels_like),
                 temp_min = KelvinToCelsius(source.main.temp_min),
                 temp_max = KelvinToCelsius(source.main.temp_max),
-                icon = source.weather[0].icon,
+                icon = iconValue,
                 datum = (source.dt)
             };
         }

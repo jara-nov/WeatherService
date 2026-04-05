@@ -1,0 +1,42 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "WeatherService | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:7396"
+    },
+    {
+      "url": "http://localhost:5478"
+    }
+  ],
+  "paths": {
+    "/api/weatherforecast": {
+      "get": {
+        "tags": [
+          "WeatherService"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "WeatherService"
+    }
+  ]
+}

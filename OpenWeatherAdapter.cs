@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
+using System.Text.Json;
 
 public class OpenWeatherAdapter:IDisposable
 {
@@ -25,7 +26,70 @@ public class OpenWeatherAdapter:IDisposable
             string requestUrl = $"{API_URL}?{attributesString}";
             Console.WriteLine($"request url = {requestUrl}");
             var response = client.GetAsync(requestUrl).Result;
-            return response.Content.ReadAsStringAsync().Result;
+            var weatherData = MapWeather(response.Content.ReadAsStringAsync().Result);
+            return JsonSerializer.Serialize(weatherData);
+        }
+    }
+
+    public WeatherData MapWeather(string openWeatherJson)
+    {
+        return OpenWeatherMapper.Map(openWeatherJson);
+    }
+
+    public struct WeatherData
+    {
+        public double feels_like { get; set; }
+        public double temp_min { get; set; }
+        public double temp_max { get; set; }
+        public string? icon { get; set; }
+        public DateTime datum { get; set; }
+    }
+
+    private static class OpenWeatherMapper
+    {
+        public static WeatherData Map(string openWeatherJson)
+        {
+            var source = JsonSerializer.Deserialize<OpenWeatherResponse>(openWeatherJson);
+            if (source.weather == null || source.weather.Length == 0)
+            {
+                throw new InvalidOperationException("OpenWeather response does not contain weather data.");
+            }
+
+            return new WeatherData
+            {
+                feels_like = KelvinToCelsius(source.main.feels_like),
+                temp_min = KelvinToCelsius(source.main.temp_min),
+                temp_max = KelvinToCelsius(source.main.temp_max),
+                icon = source.weather[0].icon,
+                datum = DateTimeOffset.FromUnixTimeSeconds(source.dt)
+                    .ToOffset(TimeSpan.FromSeconds(source.timezone))
+                    .DateTime
+            };
+        }
+
+        private static double KelvinToCelsius(double kelvin)
+        {
+            return Math.Round(kelvin - 273.15, 2);
+        }
+    }
+
+    private struct OpenWeatherResponse
+    {
+        public Main main { get; set; }
+        public Weather[]? weather { get; set; }
+        public long dt { get; set; }
+        public int timezone { get; set; }
+
+        public struct Main
+        {
+            public double feels_like { get; set; }
+            public double temp_min { get; set; }
+            public double temp_max { get; set; }
+        }
+
+        public struct Weather
+        {
+            public string? icon { get; set; }
         }
     }
 

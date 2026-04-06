@@ -5,6 +5,7 @@ using System.Text.Json;
 public class OpenWeatherAdapter:IDisposable
 {
 	string API_URL = "https://api.openweathermap.org/data/2.5/weather";
+    string FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
     AttributeDictionary attributes;
     private readonly string? ApiKey = Environment.GetEnvironmentVariable("OPEN_WEATHER_API_KEY");
 
@@ -17,23 +18,35 @@ public class OpenWeatherAdapter:IDisposable
         ];
     }
 
-    public string GetWeather()
+    public WeatherData[] GetWeather()
     {
-        // Call the OpenWeather API using the attributes and return the weather data as a string.
-        using (var client = new HttpClient())
-        {
-            string attributesString = string.Join("&", attributes.Select(a => $"{a.Key}={a.Value}"));
-            string requestUrl = $"{API_URL}?{attributesString}";
-            Console.WriteLine($"request url = {requestUrl}");
-            var response = client.GetAsync(requestUrl).Result;
-            var weatherData = MapWeather(response.Content.ReadAsStringAsync().Result);
-            return JsonSerializer.Serialize(weatherData);
-        }
+        using var client = new HttpClient();
+        string attributesString = string.Join("&", attributes.Select(a => $"{a.Key}={a.Value}"));
+
+        string currentUrl = $"{API_URL}?{attributesString}";
+        Console.WriteLine($"request url = {currentUrl}");
+        var currentResponse = client.GetAsync(currentUrl).Result;
+        var currentWeather = MapWeather(currentResponse.Content.ReadAsStringAsync().Result);
+
+        string forecastUrl = $"{FORECAST_URL}?{attributesString}";
+        Console.WriteLine($"forecast url = {forecastUrl}");
+        var forecastResponse = client.GetAsync(forecastUrl).Result;
+        var forecastDays = MapForecast(forecastResponse.Content.ReadAsStringAsync().Result, currentWeather.datum);
+
+        var result = new WeatherData[1 + forecastDays.Length];
+        result[0] = currentWeather;
+        Array.Copy(forecastDays, 0, result, 1, forecastDays.Length);
+        return result;
     }
 
     public WeatherData MapWeather(string openWeatherJson)
     {
         return OpenWeatherMapper.Map(openWeatherJson);
+    }
+
+    public WeatherData[] MapForecast(string forecastJson, long currentDatum)
+    {
+        return OpenWeatherMapper.MapForecast(forecastJson, currentDatum);
     }
 
     public struct WeatherData
@@ -55,7 +68,7 @@ public class OpenWeatherAdapter:IDisposable
                 throw new InvalidOperationException("OpenWeather response does not contain weather data.");
             }
             string? iconString = source.weather[0].icon;
-            string iconSubstring = iconString?[..2] ?? "00";
+            string iconSubstring = iconString != null && iconString.Length >= 2 ? iconString[..2] : "00";
             _ = int.TryParse(iconSubstring, out int iconValue);
 
             return new WeatherData
@@ -66,6 +79,44 @@ public class OpenWeatherAdapter:IDisposable
                 icon = iconValue,
                 datum = (source.dt)
             };
+        }
+
+        public static WeatherData[] MapForecast(string forecastJson, long currentDatum)
+        {
+            var source = JsonSerializer.Deserialize<ForecastResponse>(forecastJson);
+            if (source.list == null || source.list.Length == 0)
+            {
+                return [];
+            }
+
+            DateTime currentDate = DateTimeOffset.FromUnixTimeSeconds(currentDatum).UtcDateTime.Date;
+
+            var dailyGroups = source.list
+                .GroupBy(entry => DateTimeOffset.FromUnixTimeSeconds(entry.dt).UtcDateTime.Date)
+                .Where(g => g.Key > currentDate)
+                .OrderBy(g => g.Key);
+
+            var result = new List<WeatherData>();
+            foreach (var day in dailyGroups)
+            {
+                var entries = day.ToList();
+                var noonEntry = entries.MinBy(e =>
+                    Math.Abs((DateTimeOffset.FromUnixTimeSeconds(e.dt).UtcDateTime.TimeOfDay - TimeSpan.FromHours(12)).TotalSeconds));
+
+                string? iconString = noonEntry.weather?[0].icon;
+                string iconSubstring = iconString != null && iconString.Length >= 2 ? iconString[..2] : "00";
+                _ = int.TryParse(iconSubstring, out int iconValue);
+
+                result.Add(new WeatherData
+                {
+                    feels_like = KelvinToCelsius(noonEntry.main.feels_like),
+                    temp_min = KelvinToCelsius(entries.Min(e => e.main.temp_min)),
+                    temp_max = KelvinToCelsius(entries.Max(e => e.main.temp_max)),
+                    icon = iconValue,
+                    datum = entries.Min(e => e.dt)
+                });
+            }
+            return [.. result];
         }
 
         private static double KelvinToCelsius(double kelvin)
@@ -91,6 +142,30 @@ public class OpenWeatherAdapter:IDisposable
         public struct Weather
         {
             public string? icon { get; set; }
+        }
+    }
+
+    private struct ForecastResponse
+    {
+        public ForecastEntry[]? list { get; set; }
+
+        public struct ForecastEntry
+        {
+            public long dt { get; set; }
+            public Main main { get; set; }
+            public Weather[]? weather { get; set; }
+
+            public struct Main
+            {
+                public double feels_like { get; set; }
+                public double temp_min { get; set; }
+                public double temp_max { get; set; }
+            }
+
+            public struct Weather
+            {
+                public string? icon { get; set; }
+            }
         }
     }
 

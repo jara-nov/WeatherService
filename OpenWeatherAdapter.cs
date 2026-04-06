@@ -31,7 +31,11 @@ public class OpenWeatherAdapter:IDisposable
         string forecastUrl = $"{FORECAST_URL}?{attributesString}";
         Console.WriteLine($"forecast url = {forecastUrl}");
         var forecastResponse = client.GetAsync(forecastUrl).Result;
-        var forecastDays = MapForecast(forecastResponse.Content.ReadAsStringAsync().Result, currentWeather.datum);
+        string forecastJson = forecastResponse.Content.ReadAsStringAsync().Result;
+        var forecastDays = MapForecast(forecastJson, currentWeather.datum);
+        var (forecastMin, forecastMax) = OpenWeatherMapper.GetCurrentDayMinMax(forecastJson, currentWeather.datum);
+        currentWeather.temp_min = forecastMin;
+        currentWeather.temp_max = forecastMax;
 
         var result = new WeatherData[1 + forecastDays.Length];
         result[0] = currentWeather;
@@ -79,6 +83,30 @@ public class OpenWeatherAdapter:IDisposable
                 icon = iconValue,
                 datum = (source.dt)
             };
+        }
+
+        public static (double min, double max) GetCurrentDayMinMax(string forecastJson, long currentDatum)
+        {
+            var source = JsonSerializer.Deserialize<ForecastResponse>(forecastJson);
+            if (source.list == null || source.list.Length == 0)
+            {
+                return (double.NaN, double.NaN);
+            }
+
+            DateTime currentDate = DateTimeOffset.FromUnixTimeSeconds(currentDatum).UtcDateTime.Date;
+            var todayEntries = source.list
+                .Where(e => DateTimeOffset.FromUnixTimeSeconds(e.dt).UtcDateTime.Date == currentDate)
+                .ToList();
+
+            if (todayEntries.Count == 0)
+            {
+                return (double.NaN, double.NaN);
+            }
+
+            return (
+                KelvinToCelsius(todayEntries.Min(e => e.main.temp_min)),
+                KelvinToCelsius(todayEntries.Max(e => e.main.temp_max))
+            );
         }
 
         public static WeatherData[] MapForecast(string forecastJson, long currentDatum)

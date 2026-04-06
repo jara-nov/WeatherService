@@ -34,8 +34,8 @@ public class OpenWeatherAdapter:IDisposable
         string forecastJson = forecastResponse.Content.ReadAsStringAsync().Result;
         var forecastDays = MapForecast(forecastJson, currentWeather.datum);
         var (forecastMin, forecastMax) = OpenWeatherMapper.GetCurrentDayMinMax(forecastJson, currentWeather.datum);
-        currentWeather.temp_min = forecastMin;
-        currentWeather.temp_max = forecastMax;
+        if (!double.IsNaN(forecastMin)) currentWeather.temp_min = forecastMin;
+        if (!double.IsNaN(forecastMax)) currentWeather.temp_max = forecastMax;
 
         var result = new WeatherData[1 + forecastDays.Length];
         result[0] = currentWeather;

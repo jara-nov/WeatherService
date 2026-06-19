@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
@@ -23,8 +26,9 @@ var api = app.MapGroup("/api");
 api.MapGet("weatherforecast", () =>
 {
     using var OpenWeatherAdapter = new OpenWeatherAdapter("50.680754", "13.875412");
-    var weather = OpenWeatherAdapter.GetWeather();
-    Console.WriteLine($"service will return data: {weather}");
+    OpenWeatherAdapter.WeatherData[] weather = OpenWeatherAdapter.GetWeather();
+    string weatherJson = JsonSerializer.Serialize(weather, new JsonSerializerOptions { WriteIndented = true });
+    Console.WriteLine($"service will return data: {weatherJson}");
     return weather;
 })
 .WithName("GetWeatherForecast");

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.HttpLogging;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,13 +14,6 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
-builder.Services.AddHttpLogging(options =>
-{
-    options.LoggingFields = HttpLoggingFields.RequestMethod
-        | HttpLoggingFields.RequestPath
-        | HttpLoggingFields.ResponseStatusCode
-        | HttpLoggingFields.Duration;
-});
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -29,7 +22,39 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
-app.UseHttpLogging();
+
+app.Use(async (context, next) =>
+{
+    var stopwatch = Stopwatch.StartNew();
+
+    try
+    {
+        await next();
+        stopwatch.Stop();
+
+        app.Logger.LogInformation(
+            "HTTP {Method} {Path}{QueryString} responded {StatusCode} in {ElapsedMilliseconds} ms",
+            context.Request.Method,
+            context.Request.Path,
+            context.Request.QueryString,
+            context.Response.StatusCode,
+            stopwatch.ElapsedMilliseconds);
+    }
+    catch (Exception ex)
+    {
+        stopwatch.Stop();
+
+        app.Logger.LogError(
+            ex,
+            "HTTP {Method} {Path}{QueryString} failed after {ElapsedMilliseconds} ms",
+            context.Request.Method,
+            context.Request.Path,
+            context.Request.QueryString,
+            stopwatch.ElapsedMilliseconds);
+
+        throw;
+    }
+});
 
 app.Logger.LogInformation("WeatherService started in {Environment}", app.Environment.EnvironmentName);
 

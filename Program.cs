@@ -23,7 +23,9 @@ var api = app.MapGroup("/api");
 api.MapGet("weatherforecast", () =>
 {
     using var OpenWeatherAdapter = new OpenWeatherAdapter("50.680754", "13.875412");
-    return OpenWeatherAdapter.GetWeather();
+    var weather = OpenWeatherAdapter.GetWeather();
+    Console.WriteLine($"service will return data: {weather}");
+    return weather;
 })
 .WithName("GetWeatherForecast");
 

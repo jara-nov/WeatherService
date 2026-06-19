@@ -45,7 +45,21 @@ public class OpenWeatherAdapter:IDisposable
 
     public WeatherData MapWeather(string openWeatherJson)
     {
-        return OpenWeatherMapper.Map(openWeatherJson);
+        try
+        {
+            return OpenWeatherMapper.Map(openWeatherJson);
+        }
+        catch (InvalidOperationException)
+        {
+            return new WeatherData
+            {
+                feels_like = double.NaN,
+                temp_min = double.NaN,
+                temp_max = double.NaN,
+                icon = "00",
+                datum = 0
+            };
+        }
     }
 
     public WeatherData[] MapForecast(string forecastJson, long currentDatum)

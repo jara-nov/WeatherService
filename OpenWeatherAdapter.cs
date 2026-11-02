@@ -24,12 +24,10 @@ public class OpenWeatherAdapter:IDisposable
         string attributesString = string.Join("&", attributes.Select(a => $"{a.Key}={a.Value}"));
 
         string currentUrl = $"{API_URL}?{attributesString}";
-        Console.WriteLine($"request url = {currentUrl}");
         var currentResponse = client.GetAsync(currentUrl).Result;
         var currentWeather = MapWeather(currentResponse.Content.ReadAsStringAsync().Result);
 
         string forecastUrl = $"{FORECAST_URL}?{attributesString}";
-        Console.WriteLine($"forecast url = {forecastUrl}");
         var forecastResponse = client.GetAsync(forecastUrl).Result;
         string forecastJson = forecastResponse.Content.ReadAsStringAsync().Result;
         var forecastDays = MapForecast(forecastJson, currentWeather.datum);

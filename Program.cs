@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +7,7 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
+builder.Services.AddSingleton<OpenWeatherAdapter>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -23,13 +23,20 @@ if (app.Environment.IsDevelopment())
 }
 
 var api = app.MapGroup("/api");
-api.MapGet("weatherforecast", () =>
+api.MapGet("weatherforecast", async (OpenWeatherAdapter openWeatherAdapter, ILogger<OpenWeatherAdapter> logger, CancellationToken cancellationToken) =>
 {
-    using var OpenWeatherAdapter = new OpenWeatherAdapter("50.680754", "13.875412");
-    OpenWeatherAdapter.WeatherData[] weather = OpenWeatherAdapter.GetWeather();
-    string weatherJson = JsonSerializer.Serialize(weather, new JsonSerializerOptions { WriteIndented = true });
-    Console.WriteLine($"service will return data: {weatherJson}");
-    return weather;
+    try
+    {
+        OpenWeatherAdapter.WeatherData[] weather = await openWeatherAdapter.GetWeatherAsync(cancellationToken);
+        string weatherJson = JsonSerializer.Serialize(weather, new JsonSerializerOptions { WriteIndented = true });
+        Console.WriteLine($"service will return data: {weatherJson}");
+        return Results.Ok(weather);
+    }
+    catch (WeatherUnavailableException ex)
+    {
+        logger.LogError(ex, "Weather data unavailable.");
+        return Results.Problem("Weather data is currently unavailable.", statusCode: StatusCodes.Status503ServiceUnavailable);
+    }
 })
 .WithName("GetWeatherForecast");
 

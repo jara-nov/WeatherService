@@ -29,7 +29,7 @@ api.MapGet("weatherforecast", async (OpenWeatherAdapter openWeatherAdapter, ILog
     {
         OpenWeatherAdapter.WeatherData[] weather = await openWeatherAdapter.GetWeatherAsync(cancellationToken);
         string weatherJson = JsonSerializer.Serialize(weather, new JsonSerializerOptions { WriteIndented = true });
-        Console.WriteLine($"service will return data: {weatherJson}");
+        Console.WriteLine($"service will return nonEmpty data: {weather != null && weather.Length > 0}");
         return Results.Ok(weather);
     }
     catch (WeatherUnavailableException ex)
